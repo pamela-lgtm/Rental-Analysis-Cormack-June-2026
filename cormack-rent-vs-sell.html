@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Honest Math for Sellers | Verandah Properties</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Mulish:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pine:#143229;
+    --pine-deep:#0E241D;
+    --forest:#20503F;
+    --brass:#C2A14D;
+    --brass-soft:#D8C285;
+    --ivory:#F5F1E6;
+    --paper:#FBF8F0;
+    --ink:#191812;
+    --ink-soft:#52503F;
+    --line:#E2DAC6;
+    --oxblood:#8C2F22;
+    --oxblood-bright:#B23A28;
+    --shadow:0 22px 60px -28px rgba(20,50,41,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Mulish',system-ui,sans-serif;
+    background:var(--ivory);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif;font-weight:600;line-height:1.08;letter-spacing:-.01em}
+  .mono{font-family:'Spline Sans Mono',monospace;font-variant-numeric:tabular-nums}
+  .eyebrow{font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600}
+
+  /* ---------- HERO ---------- */
+  .hero{background:radial-gradient(120% 120% at 80% 0%,var(--forest) 0%,var(--pine) 45%,var(--pine-deep) 100%);color:var(--ivory);position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--brass) 1px,transparent 1px);background-size:100% 7px;opacity:.05;pointer-events:none}
+  .hero .wrap{padding-top:84px;padding-bottom:92px;position:relative;z-index:1}
+  .hero .eyebrow{color:var(--brass-soft);margin-bottom:26px}
+  .hero h1{font-size:clamp(2.5rem,6vw,4.4rem);font-weight:600;max-width:16ch}
+  .hero h1 em{font-style:italic;color:var(--brass-soft)}
+  .hero .lede{font-size:clamp(1.05rem,1.8vw,1.3rem);max-width:54ch;margin-top:28px;color:#E7E2D2;font-weight:400}
+  .brandmark{font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;letter-spacing:.02em;display:flex;align-items:center;gap:11px;color:var(--ivory)}
+  .brandmark .dot{width:9px;height:9px;border-radius:50%;background:var(--brass);display:inline-block}
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding-top:30px;position:relative;z-index:1}
+  .topbar .tag{font-family:'Spline Sans Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brass-soft)}
+  .scrollcue{margin-top:54px;font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#B9C6BC;display:flex;align-items:center;gap:12px}
+  .scrollcue .ln{width:46px;height:1px;background:var(--brass);display:inline-block}
+
+  /* ---------- PROSE BANDS ---------- */
+  .band{padding:78px 0}
+  .band-paper{background:var(--paper)}
+  .kicker{color:var(--oxblood);margin-bottom:18px}
+  .lead-statement{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3.4vw,2.5rem);font-weight:500;line-height:1.18;max-width:20ch}
+  .lead-statement .hl{color:var(--forest);font-style:italic}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;margin-top:8px}
+  .twocol p{color:var(--ink-soft);font-size:1.05rem}
+  .twocol p + p{margin-top:18px}
+  @media(max-width:720px){.twocol{grid-template-columns:1fr;gap:24px}}
+
+  /* ---------- CALCULATOR (SIGNATURE) ---------- */
+  .calc-section{background:linear-gradient(180deg,var(--pine) 0%,var(--pine-deep) 100%);color:var(--ivory);padding:84px 0}
+  .calc-head{max-width:60ch}
+  .calc-head .eyebrow{color:var(--brass-soft);margin-bottom:18px}
+  .calc-head h2{font-size:clamp(1.9rem,4vw,2.9rem);color:var(--ivory)}
+  .calc-head p{color:#CBD6CC;margin-top:16px;font-size:1.05rem;max-width:52ch}
+  .calc{display:grid;grid-template-columns:1fr 1.05fr;gap:36px;margin-top:44px;align-items:stretch}
+  @media(max-width:860px){.calc{grid-template-columns:1fr;gap:24px}}
+
+  .panel{background:rgba(245,241,230,.04);border:1px solid rgba(216,194,133,.28);border-radius:18px;padding:30px}
+  .panel h3{font-size:1.15rem;color:var(--brass-soft);font-weight:600;margin-bottom:6px}
+  .panel .sub{font-size:.85rem;color:#A9B7AC;margin-bottom:22px}
+  .field{margin-bottom:16px}
+  .field label{display:flex;justify-content:space-between;align-items:baseline;font-size:.82rem;color:#D7E0D6;margin-bottom:7px;font-weight:600}
+  .field .hint{color:#8D9C90;font-weight:400;font-size:.74rem}
+  .inputline{display:flex;align-items:center;background:rgba(14,36,29,.55);border:1px solid rgba(216,194,133,.25);border-radius:10px;overflow:hidden}
+  .inputline .pre{padding:0 12px;color:var(--brass-soft);font-family:'Spline Sans Mono',monospace;font-size:.95rem}
+  .inputline input{flex:1;background:transparent;border:0;color:var(--ivory);font-family:'Spline Sans Mono',monospace;font-size:1rem;padding:11px 12px 11px 0;width:100%}
+  .inputline input:focus{outline:none}
+  .inputline:focus-within{border-color:var(--brass);box-shadow:0 0 0 3px rgba(194,161,77,.18)}
+
+  .sliderwrap{margin:6px 0 8px}
+  .sliderwrap .val{font-family:'Spline Sans Mono',monospace;color:var(--brass-soft);font-size:1.05rem;font-weight:700}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;background:rgba(216,194,133,.3);margin-top:14px}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--brass);cursor:pointer;border:3px solid var(--pine-deep)}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--brass);cursor:pointer;border:3px solid var(--pine-deep)}
+
+  .carry-total{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(216,194,133,.22);margin-top:18px;padding-top:16px;font-size:.85rem;color:#CBD6CC}
+  .carry-total strong{font-family:'Spline Sans Mono',monospace;color:var(--ivory);font-size:1.1rem;font-weight:700}
+
+  /* readout panel */
+  .readout{background:var(--paper);border-radius:18px;padding:32px 30px;color:var(--ink);display:flex;flex-direction:column}
+  .readout .label{font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px}
+  .bleed-number{font-family:'Spline Sans Mono',monospace;font-weight:700;font-size:clamp(2.6rem,7vw,3.9rem);color:var(--oxblood);line-height:1;letter-spacing:-.02em}
+  .bleed-caption{color:var(--ink-soft);font-size:.92rem;margin-top:10px;max-width:34ch}
+  .plus-cut{margin-top:22px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline}
+  .plus-cut .t{font-size:.9rem;color:var(--ink-soft);max-width:20ch}
+  .plus-cut .n{font-family:'Spline Sans Mono',monospace;font-weight:700;font-size:1.3rem;color:var(--oxblood-bright)}
+  .grand{margin-top:18px;background:#F0E7CF;border:1px solid var(--brass-soft);border-radius:12px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center}
+  .grand .t{font-family:'Fraunces',serif;font-weight:600;font-size:1.02rem}
+  .grand .n{font-family:'Spline Sans Mono',monospace;font-weight:700;font-size:1.45rem;color:var(--oxblood)}
+
+  .offset{margin-top:22px}
+  .offset .barlbl{display:flex;justify-content:space-between;font-size:.8rem;color:var(--ink-soft);margin-bottom:8px}
+  .bar{height:14px;border-radius:8px;background:#E7DFC9;overflow:hidden;position:relative}
+  .bar .fill{height:100%;background:linear-gradient(90deg,var(--forest),var(--brass));width:0;transition:width .6s cubic-bezier(.2,.7,.2,1)}
+  .offset .result{margin-top:16px;font-size:.98rem;color:var(--ink);line-height:1.55}
+  .offset .result b{color:var(--forest)}
+  .disclaimer{font-size:.72rem;color:#9AA79C;margin-top:22px;line-height:1.5}
+
+  /* ---------- THREE DOORS ---------- */
+  .doors-head{max-width:54ch;margin-bottom:40px}
+  .doors-head h2{font-size:clamp(1.8rem,3.8vw,2.7rem)}
+  .doors-head p{color:var(--ink-soft);margin-top:14px;font-size:1.05rem}
+  .doors{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:820px){.doors{grid-template-columns:1fr}}
+  .door{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:30px 26px;position:relative;display:flex;flex-direction:column}
+  .door .num{font-family:'Spline Sans Mono',monospace;font-size:.8rem;letter-spacing:.12em;color:var(--brass);font-weight:700;margin-bottom:16px}
+  .door h3{font-size:1.32rem;margin-bottom:12px}
+  .door p{color:var(--ink-soft);font-size:.96rem}
+  .door .verdict{margin-top:auto;padding-top:20px;font-family:'Spline Sans Mono',monospace;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+  .door.loss .verdict{color:var(--oxblood)}
+  .door.best{background:var(--pine);color:var(--ivory);border-color:var(--forest);box-shadow:var(--shadow)}
+  .door.best h3{color:var(--ivory)}
+  .door.best p{color:#CBD6CC}
+  .door.best .num{color:var(--brass-soft)}
+  .door.best .verdict{color:var(--brass-soft)}
+  .door.best .ribbon{position:absolute;top:-12px;right:22px;background:var(--brass);color:var(--pine-deep);font-family:'Spline Sans Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:5px 12px;border-radius:20px}
+
+  /* ---------- REFRAME ---------- */
+  .reframe{background:var(--forest);color:var(--ivory)}
+  .reframe .wrap{padding:78px 28px}
+  .reframe h2{font-size:clamp(1.9rem,4vw,2.8rem);max-width:18ch}
+  .reframe h2 em{font-style:italic;color:var(--brass-soft)}
+  .reframe-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 44px;margin-top:38px}
+  @media(max-width:720px){.reframe-grid{grid-template-columns:1fr;gap:22px}}
+  .rf-item{display:flex;gap:16px;align-items:flex-start}
+  .rf-item .mk{font-family:'Spline Sans Mono',monospace;color:var(--brass);font-weight:700;font-size:1rem;flex:0 0 auto;padding-top:2px}
+  .rf-item h4{font-family:'Fraunces',serif;font-size:1.12rem;font-weight:600;margin-bottom:5px}
+  .rf-item p{color:#CBD6CC;font-size:.95rem}
+
+  /* ---------- WHY ---------- */
+  .why .wrap{padding:78px 28px}
+  .why .kicker{color:var(--brass)}
+  .why h2{font-size:clamp(1.8rem,3.6vw,2.5rem);max-width:22ch}
+  .why p.intro{color:var(--ink-soft);font-size:1.08rem;max-width:58ch;margin-top:16px}
+  .why-list{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}
+  @media(max-width:820px){.why-list{grid-template-columns:1fr}}
+  .why-card{border-top:2px solid var(--brass);padding-top:18px}
+  .why-card h4{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:600;margin-bottom:8px}
+  .why-card p{color:var(--ink-soft);font-size:.95rem}
+
+  /* ---------- CTA ---------- */
+  .cta{background:radial-gradient(120% 140% at 20% 0%,var(--forest),var(--pine) 55%,var(--pine-deep));color:var(--ivory);text-align:center}
+  .cta .wrap{padding:90px 28px}
+  .cta h2{font-size:clamp(2rem,4.6vw,3.2rem);max-width:18ch;margin:0 auto}
+  .cta h2 em{font-style:italic;color:var(--brass-soft)}
+  .cta p{color:#CBD6CC;margin:20px auto 34px;max-width:46ch;font-size:1.08rem}
+  .btn{display:inline-block;background:var(--brass);color:var(--pine-deep);font-family:'Mulish',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.01em;padding:16px 34px;border-radius:40px;text-decoration:none;transition:transform .15s ease,background .15s ease}
+  .btn:hover{transform:translateY(-2px);background:var(--brass-soft)}
+  .signoff{margin-top:46px;border-top:1px solid rgba(216,194,133,.25);padding-top:30px;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .signoff .marque{font-family:'Fraunces',serif;font-style:italic;font-size:1.15rem;color:var(--brass-soft)}
+  .signoff .sub{font-family:'Spline Sans Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#9FB0A3}
+
+  footer{background:var(--pine-deep);color:#8D9C90;font-size:.78rem;text-align:center;padding:24px}
+
+  /* objections */
+  .obj-title{font-size:clamp(1.8rem,3.8vw,2.6rem);max-width:24ch}
+  .obj-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:40px}
+  @media(max-width:820px){.obj-grid{grid-template-columns:1fr}}
+  .obj{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:32px 30px}
+  .obj-q{font-family:'Fraunces',serif;font-style:italic;font-size:1.32rem;color:var(--oxblood);line-height:1.2;margin-bottom:16px}
+  .obj-a p{color:var(--ink-soft);font-size:.98rem}
+  .obj-a p + p{margin-top:14px}
+  .obj-callout{margin-top:20px;background:#F0E7CF;border:1px solid var(--brass-soft);border-radius:12px;padding:16px 18px;display:flex;gap:16px;align-items:center}
+  .obj-callout .big{font-family:'Spline Sans Mono',monospace;font-weight:700;font-size:1.7rem;color:var(--forest);flex:0 0 auto;line-height:1}
+  .obj-callout span:last-child{font-size:.88rem;color:var(--ink)}
+  .obj-tag{margin-top:18px;font-family:'Spline Sans Mono',monospace;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--forest);font-weight:700}
+
+  /* guardrails */
+  .guardrails{background:var(--pine)}
+  .guardrails .wrap{padding:74px 28px;text-align:center}
+  .guardrails .eyebrow{color:var(--brass-soft);margin-bottom:18px}
+  .guardrails h2{font-size:clamp(1.9rem,4vw,2.8rem);max-width:20ch;margin:0 auto;color:var(--ivory)}
+  .guardrails h2 em{font-style:italic;color:var(--brass-soft)}
+  .guardrails p{color:#CBD6CC;max-width:62ch;margin:20px auto 0;font-size:1.06rem}
+
+  .cta .precta{font-family:'Fraunces',serif;font-style:italic;color:var(--brass-soft);font-size:1.2rem;margin-bottom:12px}
+
+  /* vacancy reframe */
+  .vacancy{background:var(--oxblood);color:#F7ECE6}
+  .vacancy .wrap{padding:64px 28px;text-align:center}
+  .vacancy .eyebrow{color:#E9C3B8;margin-bottom:16px}
+  .vacancy h2{font-size:clamp(1.7rem,3.6vw,2.5rem);color:#FFF;max-width:24ch;margin:0 auto;line-height:1.14}
+  .vacancy h2 em{font-style:italic;color:#F0D9C0}
+  .vacancy p{max-width:58ch;margin:18px auto 0;color:#F3E1DA;font-size:1.06rem}
+
+  /* rental analysis / CMA */
+  .cma-head{max-width:62ch}
+  .cma-head h2{font-size:clamp(1.8rem,3.8vw,2.6rem)}
+  .cma-head .addr{font-family:'Spline Sans Mono',monospace;font-size:.76rem;letter-spacing:.05em;color:var(--forest);margin-top:12px;font-weight:600}
+  .cma-head p{color:var(--ink-soft);margin-top:14px;font-size:1.04rem}
+  .cma-block{margin-top:32px}
+  .cma-block h3{font-family:'Spline Sans Mono',monospace;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--forest);font-weight:700;margin-bottom:6px;border-bottom:1px solid var(--line);padding-bottom:8px}
+  .cma-row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:14px 4px;border-bottom:1px solid var(--line)}
+  .cma-left{flex:1}
+  .cma-left .addr2{font-weight:700;color:var(--ink)}
+  .cma-left .spec{display:block;color:var(--ink-soft);font-size:.82rem;margin-top:3px}
+  .cma-right{text-align:right;white-space:nowrap}
+  .cma-right .num{font-family:'Spline Sans Mono',monospace;font-weight:700;font-size:1.05rem}
+  .cma-right .num.lease{color:var(--forest)}
+  .cma-right .meta{display:block;font-family:'Spline Sans Mono',monospace;font-size:.76rem;color:var(--ink-soft);margin-top:3px}
+  .cma-row.outlier{opacity:.72}
+  .outlier-tag{display:inline-block;font-family:'Spline Sans Mono',monospace;font-size:.64rem;letter-spacing:.05em;text-transform:uppercase;color:var(--oxblood);font-weight:700;margin-top:4px}
+  .cma-row.subject{background:#EAF0E8;border:1px solid #CADBC6;border-radius:12px;padding:16px 14px;margin-top:6px}
+
+  .rec{margin-top:34px;background:var(--pine);color:var(--ivory);border-radius:18px;padding:32px 30px;display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;box-shadow:var(--shadow)}
+  @media(max-width:680px){.rec{grid-template-columns:1fr;gap:18px}}
+  .rec .price{font-family:'Spline Sans Mono',monospace;font-weight:700;font-size:clamp(1.8rem,4.5vw,2.3rem);color:var(--brass-soft);line-height:1.05}
+  .rec .price small{display:block;font-family:'Spline Sans Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#A9B7AC;font-weight:600;margin-bottom:8px}
+  .rec h3{font-family:'Fraunces',serif;font-size:1.3rem;color:var(--ivory);margin-bottom:8px}
+  .rec p{color:#CBD6CC;font-size:.95rem}
+  .rec .tag14{display:inline-block;margin-top:14px;background:var(--brass);color:var(--pine-deep);font-family:'Spline Sans Mono',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:6px 14px;border-radius:20px}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brandmark"><span class="dot"></span>Verandah Properties</div>
+      <div class="tag">An honest note for sellers</div>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow">When the listing won't sell</p>
+    <h1>Yes — you don't want to be a landlord. <em>Let's do the math anyway.</em></h1>
+    <p class="lede">Nobody lists their home for sale hoping to rent it out. But if it's been sitting — drawing few showings, or showings but no offers — the market is already telling you something, and every month you wait carries a number you never get back. Before you cut the price again, look at what waiting actually costs.</p>
+    <div class="scrollcue"><span class="ln"></span>The real cost is below</div>
+  </div>
+</header>
+
+<!-- LEAD STATEMENT -->
+<section class="band band-paper">
+  <div class="wrap">
+    <p class="eyebrow kicker">First, the uncomfortable part</p>
+    <p class="lead-statement">A listing that sits isn't bad luck. It's the <span class="hl">market quoting you a price</span> — and waiting for a different answer isn't free.</p>
+    <div class="twocol">
+      <p>When a well-kept home draws showings but no offers, the issue usually isn't the home. It's the gap between the asking price and what today's buyers will actually pay. You can close that gap one of two ways: cut the price until a buyer feels they're getting a deal, or keep paying to hold while you wait for the market to come to you.</p>
+      <p>Both cost real money. The price cut is a number you can see. The holding cost is the quieter one — taxes, insurance, HOA, utilities, and a mortgage that doesn't pause — draining out month after month with nothing coming in. That money is gone for good. It is never recouped at closing, no matter what the home eventually sells for.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VACANCY REFRAME -->
+<section class="vacancy">
+  <div class="wrap">
+    <p class="eyebrow">The question to actually ask</p>
+    <h2>Don't ask whether the rent is "enough." Ask what an <em>empty month</em> costs.</h2>
+    <p>It's natural to look at a rent figure and think "that won't be enough." But the rent isn't competing with your wish price — it's competing with <strong>zero</strong>. Every month the home sits, the full carrying cost walks out the door and never comes back. The rent has one job: stop that bleed. Measured against an empty house rather than a number in your head, even a solid market rent wins decisively — which is exactly why the smart move is to lease quickly, not to hold out for a few more dollars a month.</p>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="calc-section">
+  <div class="wrap">
+    <div class="calc-head">
+      <p class="eyebrow">The cost of waiting</p>
+      <h2>What is an empty, unsold home costing you?</h2>
+      <p>Adjust the figures to your property. Watch what a few more months of "waiting for our price" really adds up to — money that leaves and never comes back.</p>
+    </div>
+
+    <div class="calc">
+      <!-- inputs -->
+      <div class="panel">
+        <h3>Your monthly carrying costs</h3>
+        <p class="sub">Edit any line. Zero out anything that doesn't apply.</p>
+
+        <div class="field">
+          <label>Mortgage payment <span class="hint">P&amp;I</span></label>
+          <div class="inputline"><span class="pre">$</span><input type="text" inputmode="numeric" id="mortgage" value="2,600"></div>
+        </div>
+        <div class="field">
+          <label>Property taxes <span class="hint">monthly</span></label>
+          <div class="inputline"><span class="pre">$</span><input type="text" inputmode="numeric" id="taxes" value="660"></div>
+        </div>
+        <div class="field">
+          <label>Insurance <span class="hint">monthly</span></label>
+          <div class="inputline"><span class="pre">$</span><input type="text" inputmode="numeric" id="insurance" value="190"></div>
+        </div>
+        <div class="field">
+          <label>HOA &amp; CDD <span class="hint">monthly</span></label>
+          <div class="inputline"><span class="pre">$</span><input type="text" inputmode="numeric" id="hoa" value="250"></div>
+        </div>
+        <div class="field">
+          <label>Utilities &amp; lawn while vacant <span class="hint">monthly</span></label>
+          <div class="inputline"><span class="pre">$</span><input type="text" inputmode="numeric" id="util" value="180"></div>
+        </div>
+
+        <div class="carry-total"><span>Bleeds out every month</span><strong id="monthlyOut">$3,880</strong></div>
+      </div>
+
+      <!-- readout -->
+      <div class="readout">
+        <div class="sliderwrap">
+          <label style="display:flex;justify-content:space-between;align-items:baseline;font-size:.82rem;color:var(--ink-soft);font-weight:600">Months you've waited (or expect to)<span class="val mono" id="monthsVal">2</span></label>
+          <input type="range" id="months" min="1" max="18" value="2">
+        </div>
+
+        <div style="margin-top:22px">
+          <div class="label">Holding cost over that time — gone for good</div>
+          <div class="bleed-number mono" id="bleed">$15,520</div>
+          <div class="bleed-caption">Paid out while the home sits empty. None of it comes back at closing.</div>
+        </div>
+
+        <div class="plus-cut">
+          <div class="t">The price cut a buyer needs to feel a "deal"</div>
+          <div class="n mono">–<span id="cutDisplay">$20,000</span></div>
+        </div>
+        <div class="field" style="margin-top:12px">
+          <label style="color:var(--ink-soft)">Set that expected price reduction</label>
+          <div class="inputline" style="background:#F0EAD8;border-color:var(--line)"><span class="pre" style="color:var(--oxblood)">$</span><input type="text" inputmode="numeric" id="cut" value="20,000" style="color:var(--ink)"></div>
+        </div>
+
+        <div class="grand">
+          <div class="t">True cost of holding out for your price</div>
+          <div class="n mono" id="grand">$35,520</div>
+        </div>
+
+        <div class="offset">
+          <div class="field" style="margin-top:24px">
+            <label style="color:var(--ink-soft)">If you rented instead — estimated monthly rent</label>
+            <div class="inputline" style="background:#EAF0E8;border-color:#CADBC6"><span class="pre" style="color:var(--forest)">$</span><input type="text" inputmode="numeric" id="rent" value="3,195" style="color:var(--ink)"></div>
+          </div>
+          <div class="barlbl"><span>Rent offsets your carrying cost</span><span class="mono" id="offsetPct">77%</span></div>
+          <div class="bar"><div class="fill" id="offsetFill"></div></div>
+          <p class="result" id="resultLine"></p>
+        </div>
+
+        <p class="disclaimer">Illustrative only. You control every figure above; these are estimates, not a guarantee of rent, sale price, time on market, or any financial outcome. Not tax, legal, or investment advice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RENTAL ANALYSIS -->
+<section class="band band-paper">
+  <div class="wrap">
+    <div class="cma-head">
+      <p class="eyebrow kicker">Your numbers, by the comps</p>
+      <h2>What your home would actually rent for.</h2>
+      <div class="addr">13249 CORMACK LANE · LAUREATE PARK · 3 BD / 2.5 BA · 1,795 SF · BUILT 2020</div>
+      <p>Measured only against <strong>single-family homes</strong> in Laureate Park — not townhomes, which lease lower and would understate your home. Owned solar, EV charging, and a fenced yard put yours at the newest, best-equipped end of the set.</p>
+    </div>
+
+    <div class="cma-block">
+      <h3>Recently leased — single family</h3>
+      <div class="cma-row">
+        <div class="cma-left"><span class="addr2">13895 Temin Ave</span><span class="spec">3 bd / 2 ba · 1,633 sf · built 2014</span></div>
+        <div class="cma-right"><span class="num lease">$3,100</span><span class="meta">100% of ask · 18 days</span></div>
+      </div>
+      <div class="cma-row">
+        <div class="cma-left"><span class="addr2">7909 Laureate Blvd</span><span class="spec">3 bd / 2 ba · 1,899 sf · built 2016</span></div>
+        <div class="cma-right"><span class="num lease">$3,150</span><span class="meta">95.5% of ask · 68 days</span></div>
+      </div>
+    </div>
+
+    <div class="cma-block">
+      <h3>Active — single family (asking)</h3>
+      <div class="cma-row">
+        <div class="cma-left"><span class="addr2">7761 Laureate Blvd</span><span class="spec">3 bd / 2.5 ba · 1,813 sf · built 2016</span></div>
+        <div class="cma-right"><span class="num">$3,300</span><span class="meta">on market 4 days</span></div>
+      </div>
+      <div class="cma-row">
+        <div class="cma-left"><span class="addr2">14225 Walcott Ave</span><span class="spec">3 bd / 2.5 ba · 1,819 sf · built 2014</span></div>
+        <div class="cma-right"><span class="num">$3,000</span><span class="meta">on market 1 day</span></div>
+      </div>
+      <div class="cma-row outlier">
+        <div class="cma-left"><span class="addr2">8348 Tavistock Lakes Blvd</span><span class="spec">4 bd / 2.5 ba · 1,811 sf · built 2014</span><span class="outlier-tag">Outlier — 4 bd with garage apartment, not a clean comp</span></div>
+        <div class="cma-right"><span class="num">$3,350</span><span class="meta">disregarded</span></div>
+      </div>
+      <div class="cma-row subject">
+        <div class="cma-left"><span class="addr2">13249 Cormack Ln — your home</span><span class="spec">3 bd / 2.5 ba · 1,795 sf · built 2020 · solar + EV + fenced yard</span></div>
+        <div class="cma-right"><span class="num" style="color:var(--forest)">$3,150–$3,195</span><span class="meta">recommended</span></div>
+      </div>
+    </div>
+
+    <div class="rec">
+      <div class="price"><small>To lease in ~14 days</small>$3,150–$3,195</div>
+      <div>
+        <h3>Priced to move — on purpose.</h3>
+        <p>Yours is the newest home in the set with the strongest features, so it could ask near the top. But the goal isn't the highest number — it's the fastest qualified lease, because every empty week is the bleed above. Pricing just under the $3,300 listing, right where comparable homes actually lease, makes yours the obvious value and pulls applications fast. Single-family homes here lease at 98–100% of ask, so we expect to land at or very near this figure.</p>
+        <span class="tag14">Speed beats squeezing the last $50</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE DOORS -->
+<section class="band">
+  <div class="wrap">
+    <div class="doors-head">
+      <p class="eyebrow kicker">Where you actually stand</p>
+      <h2>You have three doors. Two of them cost you money you'll never see again.</h2>
+      <p>When a sale stalls and you're not ready to take the loss, the honest options narrow to three. It's worth naming all of them plainly.</p>
+    </div>
+    <div class="doors">
+      <div class="door loss">
+        <div class="num">DOOR 01</div>
+        <h3>Keep cutting until it sells</h3>
+        <p>Drop the price, and drop it again, until a buyer feels they're stealing it. It works — but "a deal for them" usually means a real, permanent loss for you, locked in at the worst possible moment.</p>
+        <div class="verdict">A loss you can't undo</div>
+      </div>
+      <div class="door best">
+        <span class="ribbon">The bridge</span>
+        <div class="num">DOOR 02</div>
+        <h3>Rent with the right partner</h3>
+        <p>Stop the bleed. A qualified resident offsets a meaningful share of your monthly costs — and some is far better than none. The part rent doesn't cover isn't simply lost, either: a portion pays down your principal, like a forced savings account. Hold now, sell later — from strength, not pressure, and genuinely hands-off.</p>
+        <div class="verdict">Stops the bleed · keeps your options</div>
+      </div>
+      <div class="door loss">
+        <div class="num">DOOR 03</div>
+        <h3>Walk away</h3>
+        <p>Let it go back to the bank. The most expensive door of all — your credit, your equity, and your future borrowing power all pay the price for years. Almost never the right answer when Door 02 exists.</p>
+        <div class="verdict">The costliest exit</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIONS -->
+<section class="band band-paper">
+  <div class="wrap">
+    <p class="eyebrow kicker">The honest answers</p>
+    <h2 class="obj-title">Two worries talk most owners out of the smart move. Let's take them head-on.</h2>
+    <div class="obj-grid">
+      <div class="obj">
+        <div class="obj-q">"The rent won't even cover my mortgage."</div>
+        <div class="obj-a">
+          <p>It's the most common reason owners talk themselves out of renting — and it quietly confuses two different things. Your mortgage and the rent were never meant to match dollar-for-dollar. What actually matters is how much of your monthly outflow stops coming out of your pocket.</p>
+          <p>Even partial coverage changes the whole picture — and a portion of every payment is paying down your principal. That isn't money spent; it's equity you keep. A vacant home, by contrast, is 100% loss with nothing building behind it.</p>
+        </div>
+        <div class="obj-callout">
+          <span class="big">65–70%</span>
+          <span>Cover even two-thirds of your costs and that's two-thirds you stop paying out of pocket — with the principal portion landing in your equity. A forced savings account, not a bill.</span>
+        </div>
+      </div>
+      <div class="obj">
+        <div class="obj-q">"What if we get nightmare tenants who wreck it?"</div>
+        <div class="obj-a">
+          <p>Start by separating two things people lump together: <strong>damage</strong> and <strong>wear</strong>. Real damage is rare — especially when you partner with the right management team — and it's exactly what screening, the deposit, and the lease are built to cover. Normal wear is just what happens when people live somewhere.</p>
+          <p>And here's the honest part: a house ages whether anyone lives in it or not — that's simply what a physical thing does. So the real choice isn't "lived-in versus untouched." It's "occupied by the right resident and earning, versus sitting empty, aging, and earning nothing."</p>
+          <p>This is where the product matters. A premium, show-ready home — fresh, neutrally painted walls (think soft greige, a grayish-beige), pristinely kept, especially in Lake Nona — draws a premium resident to match it. We use your property's condition as leverage to attract the kind of person who treats it like their own and pays on time.</p>
+        </div>
+        <div class="obj-tag">Quality product → quality resident</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFRAME -->
+<section class="reframe">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--brass-soft)">A different way to see it</p>
+    <h2>Renting isn't a life sentence. It's <em>leverage.</em></h2>
+    <div class="reframe-grid">
+      <div class="rf-item"><span class="mk">01</span><div><h4>You stop the bleed</h4><p>Carrying costs that were pure loss get meaningfully offset by rent — and some is far better than none. The math shifts from draining to holding.</p></div></div>
+      <div class="rf-item"><span class="mk">02</span><div><h4>You keep your equity intact</h4><p>No fire-sale discount. You don't hand a buyer your hard-earned equity just because the calendar pressured you.</p></div></div>
+      <div class="rf-item"><span class="mk">03</span><div><h4>You sell on your timing</h4><p>Wait for a stronger market, a better season, or more equity — and list again when you're the one with leverage.</p></div></div>
+      <div class="rf-item"><span class="mk">04</span><div><h4>You don't actually do the work</h4><p>The right partner handles the tenant, the lease, the maintenance, the compliance. You're an owner, not a landlord on call.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARDRAILS -->
+<section class="guardrails">
+  <div class="wrap">
+    <p class="eyebrow">Why our results hold up</p>
+    <h2>We don't take every home — and that's <em>the point.</em></h2>
+    <p>We don't represent every owner who calls. Our brand and our reputation are things we don't take lightly — our promise to curate Lake Nona's finest rental portfolio only means something if we stay strict about who, and what, we put our name to. So we hold non-negotiable guardrails — on the property's condition, on how it's presented, and on who we place inside it. Those rules aren't red tape; they're how we protect your investment and earn the result. If we take your home on, it's because we believe we can deliver it.</p>
+  </div>
+</section>
+
+<!-- WHY VERANDAH -->
+<section class="why band-paper band">
+  <div class="wrap">
+    <p class="eyebrow kicker">Why the partner matters</p>
+    <h2>The difference between "renting it out" and renting it out well.</h2>
+    <p class="intro">A reluctant rental can become a quiet headache — or a clean, profitable bridge to your eventual sale. The outcome comes down entirely to who manages it. That's the whole of what we do.</p>
+    <div class="why-list">
+      <div class="why-card"><h4>We curate, we don't fill</h4><p>We're selective on tenants and present your property as an investment worth protecting — the kind of resident who treats it well and pays on time.</p></div>
+      <div class="why-card"><h4>Hands-off, by design</h4><p>Leasing, screening, maintenance, inspections, compliance, and accounting are ours to carry. You get clarity and calm, not 11pm phone calls.</p></div>
+      <div class="why-card"><h4>Built for the bridge</h4><p>We understand the seller who'd rather not be here. We protect the home's condition and your optionality so that selling later is clean and strong.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap">
+    <p class="precta">If you have to make a decision, make the right one.</p>
+    <h2>Sell from <em>strength</em> — not from a corner.</h2>
+    <p>Sell when you hold the leverage, not when the market has you cornered. Every month you wait, the money bleeds out — and it never comes back. Let's run your real numbers and look honestly at both paths. Then you decide.</p>
+    <a class="btn" href="#contact">Get your rental analysis</a>
+    <div class="signoff">
+      <div class="marque">Curating Lake Nona's Finest Rental Portfolio</div>
+      <div class="sub">The marriage, not the sprint</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © Verandah Properties, LLC · This page is for general informational purposes and is not tax, legal, or investment advice. Figures shown are illustrative estimates you control.
+</footer>
+
+<script>
+(function(){
+  var fmt = function(n){ return n.toLocaleString('en-US', {maximumFractionDigits:0}); };
+  var num = function(id){
+    var el = document.getElementById(id);
+    var v = parseFloat((el.value||'').replace(/[^0-9.]/g,''));
+    return isNaN(v) ? 0 : v;
+  };
+  var ids = ['mortgage','taxes','insurance','hoa','util','cut','rent'];
+  var monthsEl = document.getElementById('months');
+  var bleedEl = document.getElementById('bleed');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var lastBleed = 0;
+  function animateBleed(target){
+    if(reduceMotion){ bleedEl.textContent = '$'+fmt(target); lastBleed=target; return; }
+    var start = lastBleed, t0 = null, dur = 550;
+    function step(ts){
+      if(!t0) t0 = ts;
+      var p = Math.min((ts-t0)/dur, 1);
+      var eased = 1-Math.pow(1-p,3);
+      var val = Math.round(start + (target-start)*eased);
+      bleedEl.textContent = '$'+fmt(val);
+      if(p<1) requestAnimationFrame(step); else lastBleed = target;
+    }
+    requestAnimationFrame(step);
+  }
+
+  function recalc(){
+    var monthly = num('mortgage')+num('taxes')+num('insurance')+num('hoa')+num('util');
+    var months = parseInt(monthsEl.value,10);
+    var carry = monthly*months;
+    var cut = num('cut');
+    var rent = num('rent');
+
+    document.getElementById('monthlyOut').textContent = '$'+fmt(monthly);
+    document.getElementById('monthsVal').textContent = months;
+    animateBleed(carry);
+    document.getElementById('cutDisplay').textContent = '$'+fmt(cut);
+    document.getElementById('grand').textContent = '$'+fmt(carry+cut);
+
+    var rentTotal = rent*months;
+    var pct = monthly>0 ? Math.min(100, Math.round((rent/monthly)*100)) : 0;
+    document.getElementById('offsetPct').textContent = pct+'%';
+    document.getElementById('offsetFill').style.width = pct+'%';
+
+    var line = document.getElementById('resultLine');
+    if(monthly<=0){
+      line.innerHTML = 'Enter your carrying costs above to see how much rent would offset them.';
+    } else if(pct>=100){
+      line.innerHTML = 'At that rent, you\u2019re not just covering the bleed \u2014 you\u2019d bring in about <b>$'+fmt(rentTotal)+'</b> over '+months+' month'+(months>1?'s':'')+', turning a loss into income while you wait to sell on your own terms.';
+    } else {
+      line.innerHTML = 'Renting would offset roughly <b>'+pct+'%</b> of your carrying cost \u2014 about <b>$'+fmt(rentTotal)+'</b> over '+months+' month'+(months>1?'s':'')+' \u2014 and lets you skip the $'+fmt(cut)+' discount until <b>you</b> decide the market is right.';
+    }
+  }
+
+  ids.forEach(function(id){ document.getElementById(id).addEventListener('input', recalc); });
+  monthsEl.addEventListener('input', recalc);
+
+  // intersection-triggered first animation
+  var seen=false;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting && !seen){ seen=true; recalc(); } });
+  },{threshold:.3});
+  obs.observe(document.querySelector('.calc-section'));
+  // initial paint without animation
+  lastBleed = 0; recalc();
+})();
+</script>
+</body>
+</html>
